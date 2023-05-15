@@ -1,0 +1,151 @@
+<html>
+  <head>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/quill/1.3.4/quill.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="dist/quill-blot-formatter.min.js"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/quill/1.3.4/quill.snow.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://at.alicdn.com/t/c/font_3886122_z7yd0121jwa.css"
+    />
+    <style>
+      html {
+        height: 100%;
+      }
+
+      body {
+        margin: 0;
+        height: 100%;
+      }
+
+      #scrolling-container {
+        height: 100%;
+        min-height: 100%;
+        overflow-y: auto;
+      }
+
+      #quill-container {
+        height: auto;
+        min-height: 100%;
+        padding: 20px;
+      }
+
+      #quill-container .ql-editor {
+        overflow-y: visible;
+        height: auto;
+      }
+      .poa {
+        position: absolute;
+      }
+      .insert-link-box {
+        z-index: 9999;
+        box-shadow: 0 5px 12px rgba(0, 0, 0, 0.12);
+        background-color: #ffffff;
+        border-radius: 4px;
+        max-width: 460px;
+        width: 95%;
+        padding-bottom: 4px;
+        left: 10px;
+        top: 10px;
+      }
+      .insert-link-box li {
+        padding: 12px 20px;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        border-bottom: solid 1px #e8eef4;
+      }
+      .insert-link-box li label {
+        width: 100%;
+        display: flex;
+        flex: 1;
+        flex-direction: row;
+        align-items: center;
+      }
+      .insert-link-box li p {
+        color: #5d6a7e;
+        font-size: 20px;
+      }
+      .insert-link-box li input {
+        display: flex;
+        flex: 1;
+        line-height: 1.5;
+        padding: 3px 12px;
+        height: 28px;
+        margin-left: 10px;
+        border: none;
+        outline: none;
+        height: 28px;
+        font-size: 14px;
+        font-weight: 500;
+      }
+      .insert-link-box .insert-link-save {
+        margin: 4px 8px;
+      }
+      .insert-link-box .insert-link-save button {
+        cursor: not-allowed;
+        font-size: 14px;
+        color: #949fb1;
+        height: 32px;
+        background: transparent;
+        border: none;
+        padding: 0 12px;
+      }
+      .insert-link-box .insert-link-save button.active {
+        color: #1991eb;
+        cursor: pointer;
+      }
+      .insert-link-box .insert-link-save button.active:hover {
+        background: #e8eef4;
+      }
+      .insert-link-box .link-box-icon {
+        color: rgba(34, 34, 34, 0.75);
+        font-weight: normal;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="scrolling-container">
+      <div id="quill-container">
+        <p>Hi! Here is an image...</p>
+        <p>
+          <img
+            src="https://kittenrescue.org/wp-content/uploads/2017/03/KittenRescue_KittenCareHandbook.jpg"
+          />
+        </p>
+        <!-- <p>A Video!</p>
+        <p>
+          <iframe
+            class="ql-video"
+            frameborder="0"
+            allowfullscreen="true"
+            src="https://www.youtube.com/embed/rg6CiPI6h2g"
+            height="196"
+            width="391"
+          ></iframe>
+        </p> -->
+      </div>
+    </div>
+
+    <script>
+      Quill.register({
+        "modules/blotFormatter": QuillBlotFormatter.default,
+      });
+      const quill = new Quill("#quill-container", {
+        theme: "snow",
+        scrollingContainer: "#scrolling-container",
+        modules: {
+          blotFormatter: {},
+        },
+      });
+    </script>
+  </body>
+</html>
