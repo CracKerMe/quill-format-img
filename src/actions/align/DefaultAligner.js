@@ -96,6 +96,7 @@ export default class DefaultAligner implements Aligner {
         el.setAttribute('data-link', link);
         document.querySelector('#insertLink').style.display = 'none';
         inputRef.value = 'https://';
+        quill.getSelection(true);
       });
       inputRef.addEventListener('keyup', () => {
         if (inputRef.value === 'https://') {

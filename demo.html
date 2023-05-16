@@ -166,6 +166,10 @@
           blotFormatter: {},
         },
       });
+      quill.on('editor-change', function(eventName, ...args) {
+        console.log(eventName, args);
+        console.log(quill.getContents());
+      });
     </script>
   </body>
 </html>
