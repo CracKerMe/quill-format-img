@@ -74,7 +74,7 @@ export default class DefaultAligner implements Aligner {
             <input type="text" placeholder="Paste or type Link here">
           </label></li>
         </ul>
-        <div class="insert-link-save"><button>Save Link</button>
+        <div class="insert-link-save" style="float: right;"><p>Cancel</p><button>Save Link</button>
         </div>
       </div>`;
       const tempDiv = document.createElement('div');
@@ -103,6 +103,11 @@ export default class DefaultAligner implements Aligner {
         } else {
           saveBtn.classList.add('active');
         }
+      });
+      const cancelBtn = document.querySelector('.insert-link-save p');
+      cancelBtn.addEventListener('click', () => {
+        document.querySelector('#insertLink').style.display = 'none';
+        inputRef.value = 'https://';
       });
       document.addEventListener('keyup', (e) => {
         if (e.keyCode === 27) {

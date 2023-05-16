@@ -17,6 +17,11 @@
       href="https://at.alicdn.com/t/c/font_3886122_z7yd0121jwa.css"
     />
     <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
       html {
         height: 100%;
       }
@@ -89,6 +94,21 @@
       }
       .insert-link-box .insert-link-save {
         margin: 4px 8px;
+        float: right;
+      }
+      .insert-link-box .insert-link-save p {
+        cursor: pointer;
+        font-size: 14px;
+        color: #949fb1;
+        height: 32px;
+        background: transparent;
+        border: none;
+        padding: 0 12px;
+        display: inline-block;
+        line-height: 32px;
+      }
+      .insert-link-box .insert-link-save p:hover {
+        background: #e8eef4;
       }
       .insert-link-box .insert-link-save button {
         cursor: not-allowed;

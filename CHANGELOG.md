@@ -15,3 +15,7 @@
 ### Changed
 - 修复初始链接显示加载问题
 - 修复初始save 按钮disabled问题
+
+## [v0.0.4] - 2023-05-16
+### Changed
+- 新增cancel 关闭按钮
