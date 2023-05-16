@@ -57,9 +57,11 @@ export default class DefaultAligner implements Aligner {
   showLinkSet(el, quill) {
     if (document.querySelector('#insertLink')) {
       document.querySelector('#insertLink').style.display = 'block';
+      const saveBtn = document.querySelector('.insert-link-save button');
       if (el.getAttribute('data-link')) {
         document.querySelector('#insertLink input').value =
           el.getAttribute('data-link');
+        saveBtn.classList.add('active');
       } else {
         document.querySelector('#insertLink input').value = 'https://';
       }
@@ -80,7 +82,11 @@ export default class DefaultAligner implements Aligner {
       tempDiv.innerHTML = tempUI;
       quill.root.parentNode.appendChild(tempDiv);
       const inputRef = document.querySelector('#insertLink input');
-      inputRef.value = 'https://';
+      if (el.getAttribute('data-link')) {
+        inputRef.value = el.getAttribute('data-link');
+      } else {
+        inputRef.value = 'https://';
+      }
       const saveBtn = document.querySelector('.insert-link-save button');
       saveBtn.addEventListener('click', () => {
         if (!saveBtn.classList.contains('active')) {
