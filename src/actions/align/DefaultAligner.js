@@ -47,6 +47,8 @@ export default class DefaultAligner implements Aligner {
         icon: options.icons.setlink,
         apply: (el: HTMLElement) => {
           this.showLinkSet(el, quill);
+          quill.root.click();
+          quill.update();
         },
       },
     };

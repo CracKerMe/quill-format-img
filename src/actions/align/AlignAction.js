@@ -13,7 +13,10 @@ export default class AlignAction extends Action {
 
   constructor(formatter: BlotFormatter) {
     super(formatter);
-    console.log(formatter);
+    // console.log(formatter);
+    if (document.querySelector('#insertLink')) {
+      document.querySelector('#insertLink').style.display = 'none';
+    }
     this.aligner = new DefaultAligner(formatter.options.align, formatter.quill);
     this.toolbar = new DefaultToolbar();
   }
