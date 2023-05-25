@@ -55,12 +55,13 @@ export default class DefaultAligner implements Aligner {
   }
 
   showLinkSet(el, quill) {
+    const originEl = el;
     if (document.querySelector('#insertLink')) {
       document.querySelector('#insertLink').style.display = 'block';
       const saveBtn = document.querySelector('.insert-link-save button');
-      if (el.getAttribute('data-link')) {
+      if (originEl.getAttribute('data-link')) {
         document.querySelector('#insertLink input').value =
-          el.getAttribute('data-link');
+          originEl.getAttribute('data-link');
         saveBtn.classList.add('active');
       } else {
         document.querySelector('#insertLink input').value = 'https://';
@@ -81,42 +82,42 @@ export default class DefaultAligner implements Aligner {
       tempDiv.id = 'insertLink';
       tempDiv.innerHTML = tempUI;
       quill.root.parentNode.appendChild(tempDiv);
-      const inputRef = document.querySelector('#insertLink input');
-      if (el.getAttribute('data-link')) {
-        inputRef.value = el.getAttribute('data-link');
+    }
+    const inputRef = document.querySelector('#insertLink input');
+    if (originEl.getAttribute('data-link')) {
+      inputRef.value = originEl.getAttribute('data-link');
+    } else {
+      inputRef.value = 'https://';
+    }
+    const saveBtn = document.querySelector('.insert-link-save button');
+    saveBtn.onclick = () => {
+      if (!saveBtn.classList.contains('active')) {
+        return;
+      }
+      const link = inputRef.value;
+      originEl.setAttribute('data-link', link);
+      document.querySelector('#insertLink').style.display = 'none';
+      inputRef.value = 'https://';
+      quill.getSelection(true);
+    };
+    inputRef.onkeyup = () => {
+      if (inputRef.value === 'https://') {
+        saveBtn.classList.remove('active');
       } else {
+        saveBtn.classList.add('active');
+      }
+    };
+    const cancelBtn = document.querySelector('.insert-link-save p');
+    cancelBtn.onclick = () => {
+      document.querySelector('#insertLink').style.display = 'none';
+      inputRef.value = 'https://';
+    };
+    document.addEventListener('keyup', (e) => {
+      if (e.keyCode === 27) {
+        document.querySelector('#insertLink').style.display = 'none';
         inputRef.value = 'https://';
       }
-      const saveBtn = document.querySelector('.insert-link-save button');
-      saveBtn.addEventListener('click', () => {
-        if (!saveBtn.classList.contains('active')) {
-          return;
-        }
-        const link = inputRef.value;
-        el.setAttribute('data-link', link);
-        document.querySelector('#insertLink').style.display = 'none';
-        inputRef.value = 'https://';
-        quill.getSelection(true);
-      });
-      inputRef.addEventListener('keyup', () => {
-        if (inputRef.value === 'https://') {
-          saveBtn.classList.remove('active');
-        } else {
-          saveBtn.classList.add('active');
-        }
-      });
-      const cancelBtn = document.querySelector('.insert-link-save p');
-      cancelBtn.addEventListener('click', () => {
-        document.querySelector('#insertLink').style.display = 'none';
-        inputRef.value = 'https://';
-      });
-      document.addEventListener('keyup', (e) => {
-        if (e.keyCode === 27) {
-          document.querySelector('#insertLink').style.display = 'none';
-          inputRef.value = 'https://';
-        }
-      });
-    }
+    });
   }
 
   getAlignments(): Alignment[] {
