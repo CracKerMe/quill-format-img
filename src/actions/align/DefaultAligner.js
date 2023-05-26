@@ -58,14 +58,6 @@ export default class DefaultAligner implements Aligner {
     const originEl = el;
     if (document.querySelector('#insertLink')) {
       document.querySelector('#insertLink').style.display = 'block';
-      const saveBtn = document.querySelector('.insert-link-save button');
-      if (originEl.getAttribute('data-link')) {
-        document.querySelector('#insertLink input').value =
-          originEl.getAttribute('data-link');
-        saveBtn.classList.add('active');
-      } else {
-        document.querySelector('#insertLink input').value = 'https://';
-      }
     } else {
       const tempUI = `
       <div class="insert-link-box poa">
@@ -84,12 +76,15 @@ export default class DefaultAligner implements Aligner {
       quill.root.parentNode.appendChild(tempDiv);
     }
     const inputRef = document.querySelector('#insertLink input');
+    const saveBtn = document.querySelector('.insert-link-save button');
+    saveBtn.innerText = 'Save Link';
     if (originEl.getAttribute('data-link')) {
       inputRef.value = originEl.getAttribute('data-link');
+      saveBtn.classList.add('active');
     } else {
       inputRef.value = 'https://';
+      saveBtn.classList.remove('active');
     }
-    const saveBtn = document.querySelector('.insert-link-save button');
     saveBtn.onclick = () => {
       if (!saveBtn.classList.contains('active')) {
         return;
@@ -101,6 +96,11 @@ export default class DefaultAligner implements Aligner {
       quill.getSelection(true);
     };
     inputRef.onkeyup = () => {
+      if (!inputRef.value) {
+        saveBtn.innerText = 'Remove Link';
+      } else {
+        saveBtn.innerText = 'Save Link';
+      }
       if (inputRef.value === 'https://') {
         saveBtn.classList.remove('active');
       } else {

@@ -1,6 +1,6 @@
 {
   "name": "quill-format-img",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "a module for the Quill text editor to allow blots to be reformatted. Built in formatters: resize and realign. Built in blot support: images. and add image open link",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
